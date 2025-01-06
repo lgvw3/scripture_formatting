@@ -18,11 +18,15 @@ def preprocess_scriptures():
     for file_name in os.listdir(books_path):
         if file_name.endswith(".json"):
             book_data = load_json_file(os.path.join(books_path, file_name))
+            if "subtitle" in book_data:
+                subtitle = book_data["subtitle"][0]
+            else:
+                subtitle = ""
             searchable_data.append({
-                "id": f"book_{book_data['title'].lower().replace(' ', '_')}",
+                "id": book_data['title'].lower().replace(' ', '-'),
                 "type": "book",
                 "text": book_data["title"],  # Book title
-                "content": book_data.get("subtitle", ""),  # Subtitle if available
+                "summary": subtitle,  # Subtitle if available
             })
 
     # Process chapters
@@ -39,17 +43,20 @@ def preprocess_scriptures():
                     searchable_data.append({
                         "id": chapter_data['title'],
                         "type": "chapter",
-                        "text": f"{book_folder.replace('_', ' ')} {chapter_data['chapter_title']}",
-                        "content": chapter_data.get("summary", ""),  # Chapter summary
+                        "chapter_id": chapter_data['chapter_title'],
+                        "book_id": book_folder,
+                        "summary": chapter_data.get("summary", ""),  # Chapter summary
                     })
 
                     # Add verses
                     for verse in chapter_data.get("verses", []):
                         searchable_data.append({
                             "id": f"verse_{chapter_data['title']}_{verse['number']}",
+                            "verse_number": verse['number'],
                             "type": "verse",
                             "text": verse["text"],  # Verse text
-                            "content": f"{book_folder.replace('_', ' ')} {chapter_data['chapter_title']}:{verse['number']}",
+                            "chapter_id": chapter_data['chapter_title'],
+                            "book_id": book_folder,
                         })
 
     # Process introductory material
