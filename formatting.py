@@ -9,6 +9,9 @@ book_out_dir = output_dir + '/books'
 intro_material_out_dir = output_dir + '/intro_material'
 
 os.makedirs(output_dir, exist_ok=True)
+os.makedirs(chapter_out_dir, exist_ok=True)
+os.makedirs(book_out_dir, exist_ok=True)
+os.makedirs(intro_material_out_dir, exist_ok=True)
 
 with open(all_text_file, 'r', encoding='utf-8') as file:
     all_text_data = json.load(file)

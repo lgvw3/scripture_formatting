@@ -7,3 +7,5 @@ Using json from [This great github repo](https://github.com/and-semakin/lds-scri
 ## Using my code
 
 If anyone needs access to similary formatted data you are welcome to use this. Also, checking out that linked repo may have what you need if you need translations and other data or other formats.
+
+Made a couple of changes so you can clone this repository and run formatting.py from the same directory and get outputs locally if desired.
