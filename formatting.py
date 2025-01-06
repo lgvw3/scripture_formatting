@@ -29,7 +29,7 @@ for chunk in all_text_data['contents']:
         chapter_data = {
             "title": section["title"],
             "chapter_title": section["chapter_name"],
-            "summary": section["chapter_summary"],
+            "summary": str(section["chapter_summary"][0]).replace('—', ' — '),
             "verses": section["verses"]
         }
 

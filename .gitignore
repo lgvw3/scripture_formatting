@@ -173,3 +173,5 @@ cython_debug/
 # misc
 .DS_Store
 *.pem
+
+/output
