@@ -64,12 +64,15 @@ def preprocess_scriptures():
     for file_name in os.listdir(intro_path):
         if file_name.endswith(".json"):
             intro_data = load_json_file(os.path.join(intro_path, file_name))
-            searchable_data.append({
-                "id": f"intro_{file_name.replace('.json', '')}",
-                "type": "intro",
-                "text": intro_data["title"],  # Title of the intro material
-                "content": intro_data.get("text", ""),  # Introductory text
-            })
+            paragraphs = intro_data["paragraphs"]
+            for (index, p) in enumerate(paragraphs):
+                searchable_data.append({
+                    "id": f"intro_{file_name.replace('.json', '')}_{index}",
+                    "type": "intro",
+                    "index": index,
+                    "title": intro_data["title"],  # Title of the intro material
+                    "text": p,  # Introductory text
+                })
 
     return searchable_data
 
